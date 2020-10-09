@@ -1,0 +1,29 @@
+- platform: switch
+  name: Patio Light
+  entity_id: switch.patio_light
+- platform: switch
+  name: Porch Lights
+  entity_id: switch.porch_lights
+- platform: switch
+  name: Media Center Lamp Left
+  entity_id: switch.media_center_lamp_left
+- platform: switch
+  name: Media Center Lamp Right
+  entity_id: switch.media_center_lamp_right
+- platform: switch
+  name: Kids Bedroom Lamp
+  entity_id: switch.kids_bedroom_lamp
+- platform: switch
+  name: Living Room Lamp
+  entity_id: switch.living_room_lamp
+- platform: group
+  name: Media Center Lights
+  entities:
+    - light.media_center_lamp_left
+    - light.media_center_lamp_right
+- platform: switch
+  name: Yule Lights
+  entity_id: switch.yule_lights
+- platform: switch
+  name: Yule Tree
+  entity_id: switch.yule_tree
