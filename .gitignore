@@ -3,9 +3,9 @@
 # You can whitelist files/folders with !, these will not be ignored.
 !*.yaml
 !.gitignore
-!includes
-!lovelace
-!www
+!includes/**
+!lovelace/**
+!www/**
 
 # Ignore folders.
 .storage
