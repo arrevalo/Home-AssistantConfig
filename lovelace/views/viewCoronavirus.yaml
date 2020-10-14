@@ -1,0 +1,82 @@
+icon: mdi:home-heart
+panel: false
+cards:
+  - type: entities
+    title: "Covid-19"
+    entities:
+      - entity: sensor.italy_coronavirus_current
+        type: custom:multiple-entity-row
+        name: Italy
+        show_state: false
+        icon: "mdi:biohazard"
+        unit: " "
+        entities:
+          - entity: sensor.italy_coronavirus_confirmed
+            name: Confirmed
+            unit: " "
+          - entity: sensor.italy_coronavirus_current
+            name: Current
+            unit: " "
+          - entity: sensor.italy_coronavirus_deaths
+            name: Deaths
+            unit: " "
+          - entity: sensor.italy_coronavirus_recovered
+            name: Recovered
+            unit: " "
+      - entity: sensor.us_coronavirus_current
+        type: custom:multiple-entity-row
+        name: USA
+        show_state: false
+        icon: "mdi:biohazard"
+        unit: " "
+        entities:
+          - entity: sensor.us_coronavirus_confirmed
+            name: Confirmed
+            unit: " "
+          - entity: sensor.us_coronavirus_current
+            name: Current
+            unit: " "
+          - entity: sensor.us_coronavirus_deaths
+            name: Deaths
+            unit: " "
+          - entity: sensor.us_coronavirus_recovered
+            name: Recovered
+            unit: " "
+      - entity: sensor.texas_coronavirus
+        type: custom:multiple-entity-row
+        name: Texas
+        show_state: false
+        icon: "mdi:biohazard"
+        unit: " "
+        entities:
+          - attribute: Confirmed
+            name: Confirmed
+            unit: " "
+          - entity: sensor.texas_coronavirus
+            name: Current
+            unit: " "
+          - attribute: Deaths
+            name: Deaths
+            unit: " "
+          - attribute: Recovered
+            name: Recovered
+            unit: " "
+      - entity: sensor.mexico_coronavirus_recovered
+        type: custom:multiple-entity-row
+        name: Mexico
+        show_state: false
+        icon: "mdi:biohazard"
+        unit: " "
+        entities:
+          - entity: sensor.mexico_coronavirus_confirmed
+            name: Confirmed
+            unit: " "
+          - entity: sensor.mexico_coronavirus_current
+            name: Current
+            unit: " "
+          - entity: sensor.mexico_coronavirus_deaths
+            name: Deaths
+            unit: " "
+          - entity: sensor.mexico_coronavirus_recovered
+            name: Recovered
+            unit: " "

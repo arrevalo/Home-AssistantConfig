@@ -149,3 +149,4 @@ notify: !include includes/notify.yaml
 group: !include includes/groups.yaml
 automation: !include automations.yaml
 script: !include includes/scripts.yaml
+media_player: !include includes/media_player.yaml

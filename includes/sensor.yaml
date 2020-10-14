@@ -1,0 +1,62 @@
+# - platform: command_line
+#   name: Server Power Mode Command
+#   command: "cat /sys/class/power_supply/AC/online"
+#   scan_interval: 300
+#   value_template: '{{ value }}'
+
+# - platform: command_line
+#   name: Server Battery Command
+#   command: "cat /sys/class/power_supply/BAT0/capacity"
+#   scan_interval: 300
+#   value_template: '{{ value | int}}'
+
+# - platform: template
+#   sensors:
+#     server_battery:
+#       friendly_name: "Server Battery"
+#       unit_of_measurement: '%'
+#       value_template: "{{ states('sensor.server_battery_command') }}"
+#       device_class: battery
+
+#     server_power_mode:
+#       friendly_name: "Server Power Mode"
+#       value_template: '{% if is_state("sensor.server_power_mode_command", "1") %} AC {% else %} Battery {%- endif %}'
+#       icon_template: >
+#         {% if is_state("sensor.server_power_mode_command", "1") %}
+#           mdi:power-plug
+#         {% else %}
+#           mdi:power-plug-off
+#         {% endif %}
+
+- platform: systemmonitor
+  resources:
+    - type: last_boot
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: processor_use
+
+- platform: command_line
+  name: CPU Temperature
+  unit_of_measurement: "°F"
+  command: "cat /sys/class/thermal/thermal_zone0/temp | awk '{print ((($1*.001) * 9 / 5))+32}'"
+  value_template: "{{ value | round(0) }}"
+
+##### Random for Locks
+- platform: random
+  name: "Random code"
+  minimum: 1000
+  maximum: 9999
+
+- platform: badnest
+# - platform: mqtt
+#   name: "Closet Temperature"
+#   state_topic: "sensor/temperature"
+#   qos: 0
+#   unit_of_measurement: "ºF"
+
+# - platform: mqtt
+#   name: "Closet Humidity"
+#   state_topic: "sensor/humidity"
+#   qos: 0
+#   unit_of_measurement: "%"

@@ -1,0 +1,90 @@
+icon: mdi:music
+title: ""
+panel: true
+cards:
+  - type: custom:layout-card
+    layout: horizontal
+    cards:
+      - type: custom:swipe-card
+        cards:
+          - type: custom:mini-media-player
+            name: Sonos Media Center
+            entity: media_player.media_center
+            icon: mdi:speaker
+            artwork: full-cover-fit
+            hide:
+              power: true
+              icon: true
+            style: |
+              ha-card {
+                height: 440px !important;
+              }
+              :host {
+                --paper-card-background-color:
+                    #d3d3d3
+                  ;
+              }
+          - type: custom:mini-media-player
+            name: Sonos Bedroom
+            entity: media_player.bedroom
+            icon: mdi:speaker
+            artwork: full-cover-fit
+            hide:
+              power: true
+              icon: true
+            style: |
+              ha-card {
+                height: 440px !important;
+              }
+              :host {
+                --paper-card-background-color:
+                    #d3d3d3
+                  ;
+              }
+      - type: entity-filter
+        entities:
+          - type: custom:mini-media-player
+            entity: media_player.kids_bedroom_speaker
+            icon: mdi:google-home
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.office_display
+            icon: mdi:google-home
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.living_room_wifi
+            icon: mdi:google-home
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.office_speaker
+            icon: mdi:google-home
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.main_bedroom_speaker
+            icon: mdi:google-home
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.main_bathroom_speaker
+            icon: mdi:google-home
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.main_bedroom_tv
+            icon: mdi:television
+            artwork: cover
+            group: true
+          - type: custom:mini-media-player
+            entity: media_player.living_room_tv
+            icon: mdi:television
+            artwork: cover
+            group: true
+        state_filter:
+          - "on"
+          - "idle"
+          - "playing"
+        show_empty: false

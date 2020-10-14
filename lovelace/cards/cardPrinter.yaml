@@ -1,0 +1,37 @@
+type: entities
+title: Brother Printer
+show_header_toggle: false
+entities:
+  - sensor.brother_printer_status
+  - sensor.brother_printer_page_counter
+  - type: 'custom:bar-card'
+    direction: up
+    entities:
+      - color: MediumTurquoise
+        entity: sensor.brother_printer_cyan_toner_remaining
+        name: Cyan
+      - color: MediumOrchid
+        entity: sensor.brother_printer_magenta_toner_remaining
+        name: Magenta
+      - color: Gold
+        entity: sensor.brother_printer_yellow_toner_remaining
+        name: Yellow
+      - color: Black
+        entity: sensor.brother_printer_black_toner_remaining
+        name: Black
+    entity_row: true
+    height: 100px
+    positions:
+      icon: off
+      title: off
+      name: outside
+    max: 100
+    min: 0  
+    unit_of_measurement: '%'
+    stack: horizontal
+    style: |-
+      bar-card-value {
+        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 5px grey;
+      }

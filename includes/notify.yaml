@@ -1,0 +1,42 @@
+# SMTP email
+- name: email
+  platform: smtp
+  server: smtp.gmail.com
+  port: 587
+  timeout: 15
+  sender: !secret smtp_email
+  encryption: starttls
+  username: !secret smtp_email
+  password: !secret smtp_password
+  recipient:
+    - !secret smtp_recipient1
+    - !secret smtp_recipient2
+  sender_name: Home Assistant
+
+# Pushbullet
+- name: pushbullet_u1
+  platform: pushbullet
+  api_key: !secret pushbullet_u1_key
+
+- name: pushbullet_u2
+  platform: pushbullet
+  api_key: !secret pushbullet_u2_key
+
+- name: cellphones
+  platform: group
+  services:
+    - service: mobile_app_note10
+    - service: mobile_app_pixel_4_xl
+
+- name: pushbullets
+  platform: group
+  services:
+    - service: pushbullet_u1
+    - service: pushbullet_u2
+
+- name: all
+  platform: group
+  services:
+    - service: email
+    - service: pushbullets
+    - service: cellphones

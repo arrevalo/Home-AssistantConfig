@@ -1,0 +1,38 @@
+type: horizontal-stack
+cards:
+  - type: "custom:button-card"
+    entity: camera.front_door
+    name: Front Door
+    icon: mdi:camera
+    template: camera_button
+    double_tap_action:
+      action: call-service
+      service: script.turn_on
+      service_data:
+        entity_id: script.switch_front_door_camera
+    tap_action:
+      action: javascript
+      launch: |
+        [[[
+          window.open('android-app://com.nest.android');
+        ]]]
+    hold_action:
+      action: more-info
+  - type: "custom:button-card"
+    entity: camera.living_room
+    name: Living Room
+    icon: mdi:camera
+    template: camera_button
+    double_tap_action:
+      action: call-service
+      service: script.turn_on
+      service_data:
+        entity_id: script.switch_living_room_camera
+    tap_action:
+      action: javascript
+      launch: |
+        [[[
+          window.open('android-app://com.nest.android');
+        ]]]
+    hold_action:
+      action: more-info
