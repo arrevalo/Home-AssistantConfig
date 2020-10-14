@@ -1,6 +1,0 @@
-# Use an ADB server for sending ADB commands
-- platform: androidtv
-  name: Main Bedroom TV
-  host: !secret living_room_tv_ip
-  adb_server_ip: !secret adb_server_ip
-  adb_server_port: !secret adb_server_port
