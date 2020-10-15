@@ -8,12 +8,10 @@ cards:
       ## Column 1
       - type: vertical-stack
         cards:
-          - type: 'custom:simple-thermostat'
+          - type: "custom:simple-thermostat"
             entity: climate.upstairs_thermostat
             step_layout: row
-            name: false
             icon: false
-            control: false
             step_size: 1
             decimals: 0
           - !include /config/lovelace/cards/viewMain/cardAlarm.yaml
