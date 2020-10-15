@@ -1,0 +1,10 @@
+icon: mdi:shield
+title:
+panel: false
+cards:
+  ## Column 1
+  - type: vertical-stack
+    cards:        
+    - type: custom:simple-alarm-card
+      entity: alarm_control_panel.ha_alarm      
+      title: Alarm

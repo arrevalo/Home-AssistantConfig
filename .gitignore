@@ -1,0 +1,30 @@
+# An * ensures that everything will be ignored.
+#*
+# You can whitelist files/folders with !, these will not be ignored.
+!.gitignore
+
+# Ignore folders.
+.git
+.storage
+.cloud
+.google.token
+custom_components
+deps
+node-red
+ssh
+tts
+
+# Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+.google_maps_location_sharing.cookies.*
+home-assistant.log
+home-assistant_v2.db
+pyozw.sqlite
+options.xml
+zwcfg_0xf604578d.xml
+zwcfg_0xfc0fe5fa.xml
+zwscene.xml
+OZW_Log.txt
+.HA_VERSION

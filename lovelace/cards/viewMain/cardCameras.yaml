@@ -1,0 +1,12 @@
+type: custom:swipe-card
+cards:
+  - type: picture-entity
+    title: Front Door
+    entity: camera.front_door
+    camera_image: camera.front_door
+    tap_action: none
+  - type: picture-entity
+    title: Living Room
+    entity: camera.living_room
+    camera_image: camera.living_room
+    tap_action: none

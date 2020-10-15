@@ -1,0 +1,152 @@
+homeassistant:
+  customize: !include customize.yaml
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Enable the cloud component
+cloud:
+
+system_health:
+
+lovelace:
+  mode: yaml
+  resources:
+    - url: /hacsfiles/lovelace-layout-card/layout-card.js
+      type: module
+    - url: /hacsfiles/button-card/button-card.js
+      type: module
+    - url: /hacsfiles/custom-header/custom-header.js
+      type: module
+    - url: /hacsfiles/swipe-card/swipe-card.js
+      type: module
+    - url: /hacsfiles/simple-thermostat/simple-thermostat.js
+      type: module
+    - url: /hacsfiles/bar-card/bar-card.js
+      type: module
+    - url: /hacsfiles/lovelace-card-mod/card-mod.js
+      type: module
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+      type: module
+
+http:
+  # base_url: !secret base_url
+
+hacs:
+  token: !secret hacs_token
+
+logger:
+  default: error
+
+mobile_app:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+input_text:
+  nest_mode:
+    name: Nest Mode
+  alarm_mode_when_triggered:
+    name: Alarm Mode
+
+input_boolean:
+  home_notifications:
+    name: Home Notifications
+    icon: mdi:speaker-off
+  siren_notifications:
+    name: Siren
+    icon: mdi:alarm-off
+
+input_number:
+  lock_code:
+    name: Lock code
+    initial: 1234
+    min: 1000
+    max: 9999
+    step: 1
+    mode: box
+
+# MQTT necessary for alarm panel
+#mqtt:
+#  broker: !secret mosquitto_server
+#  port: 1883
+#  username: !secret mosquitto_username
+#  password: !secret mosquitto_password
+
+recorder:
+  purge_keep_days: 14
+  db_url: !secret mariadb_url
+  exclude:
+    domains:
+      - script
+      - sensor
+
+device_tracker:
+  - platform: google_maps
+    username: !secret googlemaps_user
+
+# Alarm control panel
+alarm_control_panel:
+  - platform: manual
+    code: !secret alarm_code
+    trigger_time: 600
+    disarm_after_trigger: false
+    arming_time: 0
+    delay_time: 0
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 0
+    armed_away:
+      arming_time: 30
+      delay_time: 30
+
+badnest:
+  issue_token: !secret badnest_token
+  cookie: !secret badnest_cookie
+
+camera:
+  - platform: badnest
+
+climate:
+  - platform: badnest
+    scan_interval: 10
+
+# badnest sensor config in sensor.yaml
+
+eufy_vacuum:
+  devices:
+    - name: Robovac
+      address: !secret eufy_ip
+      access_token: !secret eufy_local_key
+      id: !secret eufy_device_id
+      type: T2118
+
+light: !include includes/light.yaml
+sensor: !include includes/sensor.yaml
+notify: !include includes/notify.yaml
+group: !include includes/groups.yaml
+automation: !include automations.yaml
+script: !include includes/scripts.yaml
+media_player: !include includes/media_player.yaml

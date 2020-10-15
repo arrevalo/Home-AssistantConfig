@@ -1,0 +1,155 @@
+######### Voice
+let_dog_out:
+  sequence:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.u1
+          state: "home"
+        - condition: state
+          entity_id: person.u2
+          state: "home"
+    - service: camera.turn_off
+      data:
+        entity_id: camera.living_room
+    - service: script.turn_on
+      data:
+        entity_id: script.disarm
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.home_notifications
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_wifi
+        volume_level: 0.4
+    - service: tts.google_say
+      data_template:
+        entity_id: media_player.living_room_wifi
+        message: "You can open the door"
+
+good_night:
+  sequence:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.u1
+          state: "home"
+        - condition: state
+          entity_id: person.u2
+          state: "home"
+    - service: light.turn_off
+      data:
+        entity_id:
+          - light.media_center_lights
+          - light.living_room_lamp
+    - service: camera.turn_on
+      data:
+        entity_id: camera.living_room
+    - service: script.turn_on
+      data:
+        entity_id: script.arm_home
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.home_notifications
+
+turn_off_home_notifications:
+  sequence:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.u1
+          state: "home"
+        - condition: state
+          entity_id: person.u2
+          state: "home"
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.home_notifications
+
+turn_on_home_notifications:
+  sequence:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: person.u1
+          state: "home"
+        - condition: state
+          entity_id: person.u2
+          state: "home"
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.home_notifications
+
+######### End of Voice
+
+arm_home:
+  sequence:
+    - service: alarm_control_panel.alarm_arm_home
+      data:
+        entity_id: alarm_control_panel.ha_alarm
+        code: !secret alarm_code
+
+arm_away:
+  sequence:
+    - service: alarm_control_panel.alarm_arm_away
+      data:
+        entity_id: alarm_control_panel.ha_alarm
+        code: !secret alarm_code
+
+disarm:
+  sequence:
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.ha_alarm
+        code: !secret alarm_code
+
+# Set Guest Code with random numbers
+random_lock_code:
+  alias: Generate and Set Lock Code
+  sequence:
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.lock_code
+        value: "{{ states.sensor.random_code.state | int }}"
+    - service: lock.set_usercode
+      data_template:
+        {
+          "node_id": 4,
+          "code_slot": 1,
+          "usercode": "{{ states.input_number.lock_code.state | int }}",
+        }
+    - service: lock.set_usercode
+      data_template:
+        {
+          "node_id": 5,
+          "code_slot": 1,
+          "usercode": "{{ states.input_number.lock_code.state | int }}",
+        }
+    - service: notify.pushbullet_u1
+      data_template:
+        message: "*New User Code Generated* \n The new code for the month is: {{ states.input_number.lock_code.state | int }}"
+    - service: notify.pushbullet_u2
+      data_template:
+        message: "*New User Code Generated* \n The new code for the month is: {{ states.input_number.lock_code.state | int }}"
+
+switch_living_room_camera:
+  alias: Toggle Living Room Camera
+  sequence:
+    - service: >
+        {% if states('camera.living_room') == 'recording' %}
+          camera.turn_off
+        {% else %}
+          camera.turn_on
+        {% endif %}
+      entity_id: camera.living_room
+
+switch_front_door_camera:
+  alias: Toggle Front Door Camera
+  sequence:
+    - service: >
+        {% if states('camera.front_door') == 'recording' %}
+          camera.turn_off
+        {% else %}
+          camera.turn_on
+        {% endif %}
+      entity_id: camera.front_door

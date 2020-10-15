@@ -1,0 +1,16 @@
+security_sensors:
+  name: Security sensors
+  entities:
+    - binary_sensor.motion_sensor
+    - binary_sensor.front_door
+    - binary_sensor.patio_door
+    - binary_sensor.front_windows
+    - binary_sensor.kitchen_windows
+    - binary_sensor.restroom_window
+
+windows:
+  name: Windows
+  entities:
+    - binary_sensor.front_windows
+    - binary_sensor.kitchen_windows
+    - binary_sensor.restroom_window
